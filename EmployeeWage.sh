@@ -46,3 +46,26 @@ case "$random" in
 	echo "Employee is absent :"
    ;;
 esac
+
+
+# Calculating Wage for a month
+
+for (( day=1; day<=$num_Working_Days; day++ ))
+do
+   random=$(( RANDOM%3 ))
+   case "$random" in
+      1)
+	      empHrs=8 
+			;;
+      2)
+	      empHrs=4 
+			;;
+      0)
+	      empHrs=0 
+	      ;;
+   esac               
+    salary=$(($empHrs * $emp_Rate_per_Hours))
+   totalSalary=$(($totalSalary+$salary))
+ echo "normal salary  : $salary"
+done
+
