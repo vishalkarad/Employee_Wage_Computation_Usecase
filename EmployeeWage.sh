@@ -1,5 +1,6 @@
 #!/bin/bash -x
 
+#Constant variables
 employee_Full_Time_Hours=8
 employee_Part_Time_Hours=4
 emp_Rate_per_Hours=20
@@ -8,6 +9,10 @@ mx_Hrs_In_month=100
 employee_hours=0
 employee_Full_Time_Work=1
 Employee_Part_Time_Work=0
+
+#variables
+totalWorkHours=0
+totalWorkingDays=0
 echo "Welcome to Employee Wage Computation program "
  
 # create random function and check employee is present or not using if else
@@ -134,3 +139,38 @@ function getworkHourse(){
 random=$(( RANDOM%3 ))
 employeeType="$( getworkHourse $random )"
 echo "$employeeType"
+
+
+# find working days
+function getworkHourse(){
+
+	if [ $1 -eq 0 ]
+	then
+		echo "$employee_Part_Time_Hours"
+
+	elif [ $1 -eq 1 ]
+	then
+		echo "$employee_Full_Time_Hours"
+
+	elif [ $1 -eq 2 ]
+   then
+		echo "$employee_hours"
+	fi
+}
+
+# find wage 
+function dailyWage(){
+
+	wage=$(( $1*$emp_Rate_per_Hours ))
+	echo "$wage"
+}
+while [[ $totalWorkHours -lt $mx_Hrs_In_month && $totalWorkingDays -lt $num_Working_Days ]]
+do
+	((totalWorkingDays++))
+	hour="$( getworkHourse $(( RANDOM%3 )) )"
+	totalWorkHours=$(($totalWorkHours+$hour))
+	empDailyWage[$totalWorkingDays]="$( dailyWage $hour )"
+done
+
+	totalSalary="$( dailyWage $totalWorkHours )"
+	echo "Daily Wage " ${empDailyWage[@]}
