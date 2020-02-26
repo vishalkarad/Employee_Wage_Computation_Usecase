@@ -69,3 +69,46 @@ do
  echo "normal salary  : $salary"
 done
 
+# Wages Working Hours and days
+
+loop=1
+# Runing while loop until complet hourse or days
+while [ $loop -ne 0 ]
+do
+	hoursDays=$(( RANDOM%2 ))
+
+# Random function generate 100 then run if block And calculate oprations
+case "$hoursDays" in 
+0)
+   employeeType=$(( RANDOM%2 ))
+	echo "Employee worked 100 hour"
+	if [ $employeeType -eq 0 ]
+	then
+	   echo "Employee is full time worker ."
+		echo "Employee wages is $(( $mx_Hrs_In_month*$emp_Rate_per_Hours )) "
+		loop=0
+	else
+		echo "Employee is part  time worker ."
+      echo "Employee wages is $(( $mx_Hrs_In_month*$emp_Rate_per_Hours )) "
+		loop=0
+	fi
+	;;
+
+# Random function generate 100 then run if block And calculate oprations 
+1)
+   employeeType=$(( RANDOM%2 ))
+   echo "Employee worked 20 days"
+   if [ $employeeType -eq 0 ]
+   then
+      echo "Employee is full time worker ."
+      echo "Employee wages is $(( $(( $num_Working_Days*$employee_Full_Time_Hours )) * $emp_Rate_per_Hours )) "
+	   loop=0
+   else
+      echo "Employee is part  time worker ."
+      echo "Employee wages is $(( $(( $num_Working_Days*$employee_Part_Time_Hours )) * $emp_Rate_per_Hours ))"
+	   loop=0
+   fi
+	;;
+esac
+
+done
