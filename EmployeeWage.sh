@@ -112,3 +112,25 @@ case "$hoursDays" in
 esac
 
 done
+
+# Work hours using Function 
+
+function getworkHourse(){
+
+	if [ $1 -eq 0 ]
+	then
+		echo "$employee_Part_Time_Hours"
+
+	elif [ $1 -eq 1 ]
+	then
+		echo "$employee_Full_Time_Hours"
+
+	elif [ $1 -eq 2 ]
+   then
+		echo "employee_hours"
+	fi
+}
+  
+random=$(( RANDOM%3 ))
+employeeType="$( getworkHourse $random )"
+echo "$employeeType"
