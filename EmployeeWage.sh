@@ -174,3 +174,37 @@ done
 
 	totalSalary="$( dailyWage $totalWorkHours )"
 	echo "Daily Wage " ${empDailyWage[@]}
+# find working days
+function getworkHourse(){
+
+   if [ $1 -eq 0 ]
+   then
+      echo "$employee_Part_Time_Hours"
+
+   elif [ $1 -eq 1 ]
+   then
+      echo "$employee_Full_Time_Hours"
+
+   elif [ $1 -eq 2 ]
+   then
+      echo "$employee_hours"
+   fi
+}
+
+# find wage 
+function dailyWage(){
+
+   wage=$(( $1*$emp_Rate_per_Hours ))
+   echo "$wage"
+}
+while [[ $totalWorkHours -lt $mx_Hrs_In_month && $totalWorkingDays -lt $num_Working_Days ]]
+do
+   ((totalWorkingDays++))
+   hour="$( getworkHourse $(( RANDOM%3 )) )"
+   totalWorkHours=$(($totalWorkHours+$hour))
+   empDailyWage[$totalWorkingDays]="$( dailyWage $hour )"
+done
+
+   totalSalary="$( dailyWage $totalWorkHours )"
+   echo "Daily Wage " ${empDailyWage[@]}
+	echo "All keys " ${!empDailyWage[@]}
